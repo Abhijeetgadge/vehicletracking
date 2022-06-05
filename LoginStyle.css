@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@700&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+}
+.logo{
+    width: 16%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo img{
+    width: 50%;
+    border: 3px solid white;
+    border-radius: 50px;
+    margin: 5px;
+}
+.navbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    cursor: pointer;
+    font-family: 'Baloo Bhaijaan 2', cursive;
+}
+.navList{
+    width: 70%;
+    display: flex;
+    align-items: center;
+}
+.navList li{
+    list-style: none;
+    padding: 10px 20px;
+}
+.navList li a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+.navList li a:hover{
+    color: black;
+}
+.btn{
+    padding: 3px 10px;
+    margin: 3px 3px;
+    border: 2px solid white;
+    border-radius: 8px;
+    background: none;
+    color: white;
+    cursor: pointer;
+    font-family: 'Baloo Bhaijaan 2', cursive;
+}
+.rightNav{
+    width: 30%;
+    text-align: right;
+    padding: 0 23px;
+}
+#search{
+    padding: 5px;
+    font-size: 16px;
+    border: 2px solid black;
+    border-radius: 8px;
+}
+.background{
+    background: rgba(75, 73, 73, 0.7);
+    background-size: cover;
+    background-blend-mode: darken;
+    height: 12vh;
+}
+.burger{
+    display: none;
+    position: absolute;
+    cursor: pointer;
+    right: 5%;
+    top: 15px;
+}
+.line{
+    width: 33px;
+    background-color: white;
+    height: 4px;
+    margin: 5px 3px;
+}
+.loginPage{
+    background: url("./LoginBg2.jpg") no-repeat center center/cover;
+    height: 80vh;
+}
+.login{
+    position: absolute;
+    left: 65%;
+    top: 25%;
+}
+.loginPage h2{
+    color: black;
+    margin: 13px 0px;
+    padding: 0px 70px;
+    font-size: 2.3rem;
+    font-family: 'Baloo Bhai 2', cursive;
+}
+.loginPage .loginContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box{
+    width: 100%;
+    margin: 10px 0px;
+    border-bottom: 2px solid white;
+}
+.loginPage .loginContainer form{
+    display: flex;
+    flex-direction: column;
+    align-items: self-end;
+}
+.loginPage .loginContainer form input{
+    background: none;
+    color: black;
+    width: 75%;
+    padding: 5px 10px;
+    font-size: 20px;
+    border: none;
+    outline: none;
+}
+.loginPage .loginContainer form button{
+    cursor: pointer;
+    outline: none;
+    color: black;
+    width: 30%;
+    font-size: 15px;
+    margin: 12px 0;
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: 20px;
+    background: none;
+    font-weight: bold;
+    font-family: 'Baloo Bhaijaan 2', cursive;
+}
+.loginPage .loginContainer form button:hover{
+    background-color: white;
+    color: black;
+    border: none;
+    border-bottom: 4px solid black;
+}
+.newAccount{
+    display: flex;
+    margin-right: 152px;
+    margin-top: 40px;
+}
+.newAccount p{
+    margin-right: 10px;
+    font-size: 20px;
+}
+.newAccount a{
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+.newAccount a:hover{
+    color: black;
+}
+footer{
+    background-color: #BDC3C7;
+}
+footer .footer_container{
+    display: flex;
+    justify-content: center;
+}
+footer .footerContent{
+    display: flex;
+    justify-content: center;
+    margin: 10px 10px;
+}
+footer .social{
+    text-align: center;
+    padding: 0px 20px;
+}
+footer .social h2{
+    color: black;
+    font-size: 20px;
+    font-family: 'Baloo Bhai 2', cursive;
+    padding: 5px;
+}
+footer .social a{
+    text-decoration: none;
+    font-size: 30px;
+    color: black;
+    margin: 10px;
+}
+footer .social a:hover{
+    color: white;
+}
+footer .contact{
+    text-align: center;
+    padding: 0px 20px;
+}
+footer .contact h2{
+    color: black;
+    font-size: 20px;
+    font-family: 'Baloo Bhai 2', cursive;
+    padding: 5px;
+}
+footer .contact a{
+    text-decoration: none;
+    font-size: 30px;
+    color: black;
+    margin: 10px;
+}
+footer .contact a:hover{
+    color: white;
+}
+.end{
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-size: 17px;
+    padding: 7px;
+}
+@media only screen and (max-width: 1140px){
+    .navList{
+        flex-direction: column;
+    }
+    .navbar{
+        height: 478px;
+        flex-direction: column;
+        transition: all 0.7s ease-out;
+    }
+    .rightnav{
+        text-align: center;
+    }
+    .burger{
+        display: block;
+    }
+    .h-nav-resp{
+        height: 72px;
+    }
+    .v-class-resp{
+        opacity: 0;
+    }
+}

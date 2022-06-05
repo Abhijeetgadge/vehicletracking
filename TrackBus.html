@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Vehicle Detecting and Tracking System</title>
+  <link rel="stylesheet" href="TrackBusStyle.css">
+  <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.19.0.min.js"></script>
+  <link rel="stylesheet" href="./HomeStyle.css">
+  <link rel="stylesheet" href="./responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="navbar background h-nav-resp">
+    <ul class="navList v-class-resp">
+      <div class="logo">
+        <img src="./logo.png" alt="logoImage">
+      </div>
+      <li><a href="./index.html">Home</a></li>
+      <li><a href="">About Us</a></li>
+      <!-- <li><a href="../HTML/TrackBus.html">Map</a></li> -->
+      <li><a href="#contactUs">Countact Us</a></li>
+      <li><a href="./Login.html">Login/Register</a></li>
+    </ul>
+    <div class="rightNav v-class-resp">
+      <input type="text" name="search" id="search">
+      <button class="btn">Search</button>
+    </div>
+    <div class="burger">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+  <div class="bg"></div>
+  <div class="bg-others">
+    <div class="container">
+      <h1>Vehicle Track Using Google Map</h1>
+      <center>
+        <hr style="height:2px; border:none; color:#ffffff; background-color:#ffffff; width:35%; margin: 0 auto 0 auto;">
+      </center>
+      <p>Electronics and Telecommunication Department</p>
+      <center><button class="btn btn-success col-sm-3" id="action">Start Tracking</button></center><br>
+      <center>
+        <div id="map-canvas"></div>
+      </center>
+    </div>
+  </div>
+
+  <footer id="contactUs">
+    <div class="footer_container">
+      <div class="footerContent">
+        <div class="social">
+          <h2>Follow Us</h2>
+          <a href=""><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+          <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
+          <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
+        </div>
+        <div class="contact">
+          <h2>Contact Us</h2>
+          <a href="wa.me/919890763521?text=Hi"><i class="fa fa-whatsapp"></i></a>
+          <a href=""><i class="fa fa-phone"></i></a>
+          <a href=""><i class="fa fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <hr>
+  <div class="end">
+    <p>Copyright &copy; 2021 All rights regerved </p>
+  </div>
+  <script src="./resp.js"></script>
+  <script>
+    window.lat = 17.6599;
+    window.lng = 75.9064;
+
+    var map;
+    var mark;
+    var lineCoords = [];
+
+    var initialize = function () {
+      map = new google.maps.Map(document.getElementById('map-canvas'), { center: { lat: lat, lng: lng }, zoom: 12 });
+      mark = new google.maps.Marker({ position: { lat: lat, lng: lng }, map: map });
+    };
+
+    window.initialize = initialize;
+
+    var redraw = function (payload) {
+      if (payload.message.lat) {
+        lat = payload.message.lat;
+        lng = payload.message.lng;
+
+        map.setCenter({ lat: lat, lng: lng, alt: 0 });
+        mark.setPosition({ lat: lat, lng: lng, alt: 0 });
+
+        lineCoords.push(new google.maps.LatLng(lat, lng));
+
+        var lineCoordinatesPath = new google.maps.Polyline({
+          path: lineCoords,
+          geodesic: true,
+          strokeColor: '#2E10FF'
+        });
+
+        lineCoordinatesPath.setMap(map);
+      }
+    };
+
+    var pnChannel = "raspi-tracker";
+
+    var pubnub = new PubNub({
+      publishKey: 'pub-c-8ec1c15f-0975-4277-adec-0fb4fda881f2',
+      subscribeKey: 'sub-c-7d8bb242-b176-11ec-8322-7ec486788b75'
+    });
+
+    document.querySelector('#action').addEventListener('click', function () {
+      var text = document.getElementById("action").textContent;
+      if (text == "Start Tracking") {
+        pubnub.subscribe({ channels: [pnChannel] });
+        pubnub.addListener({ message: redraw });
+        document.getElementById("action").classList.add('btn-danger');
+        document.getElementById("action").classList.remove('btn-success');
+        document.getElementById("action").textContent = 'Stop Tracking';
+      }
+      else {
+        pubnub.unsubscribe({ channels: [pnChannel] });
+        document.getElementById("action").classList.remove('btn-danger');
+        document.getElementById("action").classList.add('btn-success');
+        document.getElementById("action").textContent = 'Start Tracking';
+      }
+    });
+  </script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyC58dRSnakmhqwypx_4X-6V58OfWGZtgj8&callback=initialize"></script>
+</body>
+
+</html>

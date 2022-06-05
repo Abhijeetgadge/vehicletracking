@@ -1,0 +1,32 @@
+@media only screen and (max-width: 1140px){
+    .navList{
+        flex-direction: column;
+    }
+    .navbar{
+        height: 478px;
+        flex-direction: column;
+        transition: all 0.7s ease-out;
+    }
+    .rightnav{
+        text-align: center;
+    }
+    .burger{
+        display: block;
+    }
+    .product_side a{
+        margin-right: 0px;
+    }
+    .h-nav-resp{
+        height: 72px;
+    }
+    .v-class-resp{
+        opacity: 0;
+    }
+    .login{
+        left: 24%;
+    }
+    .register{
+        height: 120vh;
+    }
+   
+}
